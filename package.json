@@ -1,0 +1,11 @@
+{
+  "name": "blocipedia",
+  "version": "1.0.0",
+  "description": "A wiki application for users to create, collaborate on, and share content",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  },
+  "author": "Ari Abramowitz",
+  "license": "ISC"
+}
