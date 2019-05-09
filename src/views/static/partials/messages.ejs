@@ -13,7 +13,14 @@
 
 <!-- #3 -->
       <% messages.error.forEach((err) => { %>
-        <li><%= `${err.param} ${err.msg}` %></li>
+
+        <% if(err.name && err.name === 'SequelizeUniqueConstraintError') { %>
+
+          <li><%= `${err.errors[0].message}` %></li>
+        <% } else { %>
+          <li><%= `${err.param} ${err.msg}` %></li>
+        <% } %>
+
       <% }) %>
     </ul>
 
