@@ -23,7 +23,7 @@ module.exports = {
         res.redirect("/users/sign_up");
       } else {
         //send email
-        sgMail.setApiKey("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");
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
           to: user.email,
           from: 'ari.abramowitz1@gmail.com',
@@ -46,15 +46,33 @@ module.exports = {
   },
 
   signIn(req, res, next){
-    passport.authenticate("local")(req, res, function () {
-      if(!req.user){
+
+    passport.authenticate('local', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
         req.flash("notice", "Sign in failed. Please try again.");
-        res.redirect("users/sign_in");
-      } else {
+        res.redirect("sign_in");
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
         req.flash("notice", "You've successfully signed in!");
         res.redirect("/");
-      }
-    })
+      });
+    }) (req, res, next);
+
+    // passport.authenticate("local")(req, res, () => {
+    //   if(!req.user){
+    //     req.flash("notice", "Sign in failed. Please try again.");
+    //     res.redirect("users/sign_in");
+    //   } else {
+    //     req.flash("notice", "You've successfully signed in!");
+    //     res.redirect("/");
+    //   }
+    // })
   },
 
   signOut(req, res, next){
