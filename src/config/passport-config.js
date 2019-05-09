@@ -4,8 +4,8 @@ const User = require("../db/models").User;
 const authHelper = require("../auth/helpers");
 
 module.exports = {
-
   init(app){
+
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -13,11 +13,12 @@ module.exports = {
       usernameField: "email"
     }, (email, password, done) => {
       User.findOne({
-        where: {email}
+        where: { email }
       })
       .then((user) => {
-        if(!user || !authHelper.comparePass(password, user.password)) {
-          return done(null, false, { message: "Invalid email or password" });
+
+        if (!user || !authHelper.comparePass(password, user.password)) {
+          return done(null, false, { message: "Invalid email or password"});
         }
 
         return done(null, user);
@@ -25,7 +26,7 @@ module.exports = {
     }));
 
     passport.serializeUser((user, callback) => {
-      callback(nul, user.id);
+      callback(null, user.id);
     });
 
     passport.deserializeUser((id, callback) => {
