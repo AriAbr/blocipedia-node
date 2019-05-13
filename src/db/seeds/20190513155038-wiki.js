@@ -20,10 +20,11 @@ module.exports = {
 
     await queryInterface.bulkInsert('Users', users, {});
 
+    console.log("log before query");
     const addedUsers = await queryInterface.sequelize.query(
-      `SELECT id from USERS;`
+      `SELECT id from "Users";`
     );
-    console.log("2");
+    console.log("log after query");
     console.log(addedUsers)
 
     const userRows = addedUsers[0];
@@ -35,7 +36,7 @@ module.exports = {
         title: faker.hacker.phrase(),
         body: faker.lorem.paragraph(),
         private: false,
-        userId: userRows[0].id,
+        userId: userRows[userRows.length-1-i%3].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
