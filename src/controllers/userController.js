@@ -63,21 +63,23 @@ module.exports = {
         res.redirect("/");
       });
     }) (req, res, next);
-
-    // passport.authenticate("local")(req, res, () => {
-    //   if(!req.user){
-    //     req.flash("notice", "Sign in failed. Please try again.");
-    //     res.redirect("users/sign_in");
-    //   } else {
-    //     req.flash("notice", "You've successfully signed in!");
-    //     res.redirect("/");
-    //   }
-    // })
   },
 
   signOut(req, res, next){
     req.logout();
     req.flash("notice", "You've successfully signed out!");
     res.redirect("/");
+  },
+
+  upgrade(req, res, next){
+    var stripe = Stripe('pk_test_GtBP0jIBYAqWtODssoYbBBch008Oj9Hn9o');
+
+    stripe.redirectToCheckout({
+      sessionId: '{{CHECKOUT_SESSION_ID}}',
+    }).then(function (result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    });
   }
 }
