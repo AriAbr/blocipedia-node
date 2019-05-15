@@ -50,7 +50,7 @@
     });
 
     function handleToken(token) {
-      fetch("upgradeCharge", {
+      fetch("users/upgradeCharge", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(token)
