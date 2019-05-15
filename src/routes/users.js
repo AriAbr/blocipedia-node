@@ -13,7 +13,14 @@ router.post("/users/sign_in", validation.validateSignIn, userController.signIn);
 
 router.get("/users/sign_out", userController.signOut);
 
-router.get("/users/upgrade", userController.upgrade);
+router.post("/users/upgradeCharge", userController.upgradeCharge);
 
+router.get("/users/upgradeForm", userController.upgradeForm);
+
+router.post("/users/upgradeUser", userController.upgradeUser);
+
+router.get("/users/downgradeForm", userController.downgradeForm);
+
+router.post("/users/downgradeUser", userController.downgradeUser);
 
 module.exports = router;
