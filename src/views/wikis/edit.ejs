@@ -20,6 +20,35 @@
           <input value="<%= wiki.title %>" type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
             <small class="text-muted" id="titleHelp">Title must be 5 or more characters in length.</small>
         </div>
+
+        <% if(currentUser.role === 2 || (currentUser.id === wiki.userId && currentUser.role === 1)) { %>
+
+          <div class="form-group">
+            <% if(wiki.private) { %>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="private-false" name="private" value="false">
+                <label class="custom-control-label" for="private-false">Public</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="private-true" name="private" value="true" checked="checked">
+                <label class="custom-control-label" for="private-true">Private</label>
+              </div>
+            <% } else { %>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="private-false" name="private" value="false" checked="checked">
+                <label class="custom-control-label" for="private-false">Public</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="private-true" name="private" value="true">
+                <label class="custom-control-label" for="private-true">Private</label>
+              </div>
+            <% } %>
+
+          </div>
+        <% } %>
+
         <div class="form-group">
           <label for="body">Body</label>
 <!-- #3 -->

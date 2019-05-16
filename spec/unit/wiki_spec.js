@@ -46,6 +46,7 @@ describe("Wiki", () => {
       .then((wiki) => {
         expect(wiki.title).toBe("Create() test wiki");
         expect(wiki.body).toBe("This wiki will test the create() method.");
+        expect(wiki.private).toBe(false);
         done();
       })
       .catch((err) => {

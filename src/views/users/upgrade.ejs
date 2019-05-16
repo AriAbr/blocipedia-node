@@ -50,6 +50,8 @@
     });
 
     function handleToken(token) {
+      console.log(token);
+
       fetch("upgradeCharge", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
