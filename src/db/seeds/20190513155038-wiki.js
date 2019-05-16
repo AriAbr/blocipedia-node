@@ -20,12 +20,9 @@ module.exports = {
 
     await queryInterface.bulkInsert('Users', users, {});
 
-    console.log("log before query");
     const addedUsers = await queryInterface.sequelize.query(
       `SELECT id from "Users";`
     );
-    console.log("log after query");
-    console.log(addedUsers)
 
     const userRows = addedUsers[0];
 
